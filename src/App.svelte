@@ -18,10 +18,14 @@
       citations = response.data.citations;
     });
   }
-</script>
 
-<!-- <input type="text" bind:value={question} placeholder="Type your query here" style="vertical-align: top; padding: 20px;" />
-<button on:click={sendRequest}>Summarize</button> -->
+  function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      sendRequest();
+    }
+  }
+
+</script>
 
 <h1>📖 ScholarSearch</h1>
 
@@ -30,6 +34,7 @@
     <Icon class="material-icons">search</Icon>
     <Input
       bind:value={question}
+      on:keydown={handleKeyDown}
       placeholder="Seach"
       class="solo-input"
     />
@@ -54,6 +59,7 @@
     <p><a href={citation.link}>{citation.link}</a></p>
     <p><strong>Citation Summary:</strong> {citation.summary}</p>
   {/each}
+  <button on:click={() => location.reload()}>New Search</button>
 {/if}
 
 <h3>FAQ</h3>

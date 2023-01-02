@@ -1,47 +1,68 @@
-# Svelte + Vite
+# ScholarSearch
 
-This template should help get you started developing with Svelte in Vite.
+ScholarSearch is a web application that helps you find the most relevant information for your research paper. Simply type in your question and ScholarSearch will use the Google Search API to find relevant webpages and then use OpenAI's language model to extract and summarize the most relevant information from those webpages. The summarized information is then used to construct a final answer to the query.
 
-## Recommended IDE Setup
+## How to use ScholarSearch
+Type your question into the search bar.
+Press the Enter key or click the search icon to send your request.
+ScholarSearch will return a summary of the most relevant information and a list of relevant sources with brief summaries of their content.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+## Technical Details
+ScholarSearch is a web application built using the Svelte framework and a Flask backend server. The frontend of the application is responsible for displaying the user interface and handling user input, while the backend server is responsible for making API calls to Google Scholar and OpenAI to retrieve and summarize information.
 
-## Need an official Svelte framework?
+To set up ScholarSearch on your local machine, you will need to install the following dependencies:
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+- Node.js
+- npm (comes with Node.js)
+- Python 3
+- Flask
+- axios
+- serpapi 
+- openai
 
-## Technical considerations
+To install these dependencies, follow the instructions below:
 
-**Why use this over SvelteKit?**
+1. Download and install Node.js from the official website. This will also install npm, which is the package manager for Node.js.
+2. Download and install Python 3 from the official website.
+3. Open a terminal and run the following command to install Flask: `pip install flask google-search-results openai dotenv` .
+4. In the same terminal, run the following command to install axios: `npm install`.
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+Once you have all the dependencies installed, you can set up the ScholarSearch application by following these steps:
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+1. Clone the ScholarSearch repository to your local machine.
+2. Navigate to the root directory of the repository in your terminal.
+3. Run the following command to start the Flask server: python app.py.
+4. In a new terminal window, navigate to the public directory within the repository.
+5. Run the following command to start the Svelte application: npm run dev.
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+The Svelte application will now be running on your local machine, and you can access it by visiting http://localhost:5000 in your web browser.
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+I chose to use Svelte for the frontend of ScholarSearch because it is a lightweight and easy-to-use framework for building web applications. Svelte allows us to build interactive user interfaces with minimal code, and it is also very fast, which is important for providing a good user experience. I chose to use Flask for the backend of ScholarSearch because it is a lightweight and easy-to-use framework for building web applications in Python. Flask allowed for the set up of a backend server quickly and easily, and it also has good support for making HTTP requests to external APIs.
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+I chose to use the Google Search API to find relevant webpages for a given query because it is a reliable and well-documented API that provides access to the vast resources of the Google search engine. The Google Search API allowed for search in webpages that are relevant to a given query, and it returns the results in a structured format that is easy to work with. I chose to use the OpenAI API to extract and summarize information from webpages because it is a powerful and state-of-the-art language model that has been trained on a large corpus of webpages. The OpenAI API allowed me to extract and summarize information from webpages quickly and as accurately as possible, and it returns the results in a structured format that is easy to work with.
 
-**Why include `.vscode/extensions.json`?**
+## A Note on WebGPT
+OpenAI's [WebGPT paper](https://openai.com/blog/webgpt/) describes a language model called WebGPT that is trained on a large corpus of webpages and is able to generate human-like text. The paper explains how the model was trained using a variant of the Transformer architecture, and how it was able to achieve state-of-the-art results on a variety of language generation tasks.
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+In ScholarSearch, we use the OpenAI API to access the WebGPT language model and use it to extract and summarize information from webpages. The API allows us to send a webpage to the model and receive a summary of the most relevant information in the page. This summary is then used to construct a final answer to the user's query.
 
-**Why enable `checkJs` in the JS template?**
+One of the key benefits of using the WebGPT language model in ScholarSearch is that it is able to generate coherent and human-like text, which makes it easier for users to understand the information that is being presented to them. Additionally, because the model is trained on a large corpus of webpages, it is able to understand the structure and content of webpages in a way that is similar to a human reader. This allows it to identify and extract the most relevant information from a webpage, which is important for providing users with the information they are looking for.
 
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
 
-**Why is HMR not preserving my local component state?**
+## FAQ
 
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
+### What is ScholarSearch?
 
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
+ScholarSearch is a tool that helps you find the most relevant information for your research paper. It uses the Google Search API to find relevant webpages and then uses OpenAI's language model to extract and summarize the most relevant information from those webpages.
 
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+### How does ScholarSearch work?
+
+ScholarSearch uses the Google Search API to find relevant webpages for a given query, and then uses OpenAI's language model to extract and summarize the most relevant information from those webpages. The summarized information is then used to construct a final answer to the query.
+
+### What does the output mean?
+
+The output is a summary of the most relevant information found for your query. The summary is generated using OpenAI's WebGPT language model, which is trained on a large corpus of webpages. The summary is not guaranteed to be 100% accurate, but it should be a good starting point for your research. The summary is also accompanied by a list of relevant sources that you can use to find more information, as well as brief summaries of the content of each source.
+
+#### References:
+- Inspired by the original WebGPT search scraping script from [rahul](https://github.com/asaprahul)
+- OpenAI WebGPT Paper (https://openai.com/blog/webgpt/)
